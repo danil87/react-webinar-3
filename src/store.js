@@ -1,4 +1,4 @@
-import {generateCode} from "./utils";
+import { generateCode } from "./utils";
 
 /**
  * Хранилище состояния приложения
@@ -43,22 +43,39 @@ class Store {
   /**
    * Добавление новой записи
    */
-  addItem() {
-    this.setState({
-      ...this.state,
-      list: [...this.state.list, {code: generateCode(), title: 'Новая запись'}]
-    })
+  addItem(item) {
+    const t = this.state.cart.find(el => el.code === item.code);
+    if (t) {
+      this.setState({
+        ...this.state,
+        cart: this.state.cart.map(el => {
+          if (el.code === item.code) {
+            return {
+              ...el,
+              amount: el.amount + 1 
+            }
+          }
+          return el;
+        })
+      })
+    }
+    else {
+      this.setState({
+        ...this.state,
+        cart: [...this.state.cart, { ...item, amount: 1 }]
+      })
+    }
   };
 
   /**
    * Удаление записи по коду
    * @param code
    */
-  deleteItem(code) {
+  deleteItem({ code }) {
     this.setState({
       ...this.state,
       // Новый список, в котором не будет удаляемой записи
-      list: this.state.list.filter(item => item.code !== code)
+      cart: this.state.cart.filter(item => item.code !== code)
     })
   };
 
@@ -79,7 +96,7 @@ class Store {
           };
         }
         // Сброс выделения если выделена
-        return item.selected ? {...item, selected: false} : item;
+        return item.selected ? { ...item, selected: false } : item;
       })
     })
   }

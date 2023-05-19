@@ -1,0 +1,34 @@
+.Modal {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.Modal.active{
+    display: flex;
+}
+
+.Modal-PageLayoute .PageLayout{
+    width: 960px;
+    min-height: 407px;
+    border-radius: 10px;
+}
+
+.Modal-PageLayoute .Head{
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 71px; 
+}
+
+.reault-price{
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+    height: 130px;
+    padding-top: 20px;
+}
