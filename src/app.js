@@ -4,6 +4,9 @@ import Controls from "./components/controls";
 import Head from "./components/head";
 import PageLayout from "./components/page-layout";
 import Modal from './components/modal';
+import ResultPrice from './components/result-price';
+import Item from './components/item';
+import ItemCart from './components/item-cart';
 
 /**
  * Приложение
@@ -15,6 +18,8 @@ function App({ store }) {
   const [modalActive, setModalActive] = useState(false);
 
   const list = store.getState().list;
+  const cartPrice = store.getState().cartPrice;
+  const cartLength = store.getState().cartLength;
   const cart = store.getState().cart;
 
   const callbacks = {
@@ -35,11 +40,18 @@ function App({ store }) {
     <div>
       <PageLayout>
         <Head title='Магазин' />
-        <Controls cart={cart} setModalActive={setModalActive} onAdd={callbacks.onAddItem} />
-        <List list={list} action='Добавить'
-          onActionWithItem={callbacks.onAddItem} />
+        <Controls cartPrice={cartPrice} cartLength={cartLength} setModalActive={setModalActive} />
+        <List list={list} onActionWithItem={callbacks.onAddItem}>
+          <Item />
+        </List>
       </PageLayout>
-      <Modal cart={cart} active={modalActive} setModalActive={setModalActive} onDeleteItem={callbacks.onDeleteItem}/>
+      <Modal active={modalActive} setModalActive={setModalActive}>
+        <Head title='Корзина' />
+        <List list={cart} onActionWithItem={callbacks.onDeleteItem}>
+          <ItemCart />
+        </List>
+        <ResultPrice title='Итого ' price={cartPrice}/>
+      </Modal>
     </div>
   );
 }

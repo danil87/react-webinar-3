@@ -22,17 +22,11 @@ function Item(props) {
         {props.item.title}
       </div>
       <div className='Item-price'>
-        {props.item.price.toLocaleString('ru', { style: 'currency', currency: 'RUB' })}
+        {props.item.price.toLocaleString() + ' ₽'}
       </div>
-      {props.item.amount ?
-        <div className='Item-amount'>
-          {`${props.item.amount} ШТ`} 
-        </div>
-        :
-      ''}
       <div className='Item-actions'>
         <button onClick={callbacks.onActionWithItem}>
-          {props.action}
+          Добавить
         </button>
       </div>
     </div>

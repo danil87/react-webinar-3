@@ -1,15 +1,19 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import Item from "../item";
 import './style.css';
 
-function List({ list, onActionWithItem, action }) {
-  console.log(list);
+function List({ list, children, onActionWithItem }) {
+
   return (
     <div className='List'>{
       list.map(item =>
         <div key={item.code} className='List-item'>
-          <Item item={item} onActionWithItem={onActionWithItem} action={action} />
+          {React.Children.map(children, (child) =>
+            React.cloneElement(child, {
+              item: item,
+              onActionWithItem: onActionWithItem
+            })
+          )}
         </div>
       )}
     </div>
@@ -20,6 +24,7 @@ List.propTypes = {
     code: PropTypes.number
   })).isRequired,
   onActionWithItem: PropTypes.func,
+  children: PropTypes.node
 };
 
 List.defaultProps = {

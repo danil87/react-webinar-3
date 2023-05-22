@@ -10,25 +10,25 @@
     display: none;
 }
 
-.Modal.active{
+.Modal.active {
     display: flex;
 }
 
-.Modal-PageLayoute .PageLayout{
-    width: 960px;
+.Modal-content {
+    min-width: 960px;
     min-height: 407px;
+    background-color: #fff;
     border-radius: 10px;
+    position: relative;
 }
 
-.Modal-PageLayoute .Head{
+.Modal-content .Head {
     border-radius: 10px 10px 0 0;
-    margin-bottom: 71px; 
+    margin-bottom: 71px;
 }
 
-.reault-price{
-    width: 90%;
-    display: flex;
-    justify-content: flex-end;
-    height: 130px;
-    padding-top: 20px;
+.Modal-btn-close {
+    position: absolute;
+    right: 40px;
+    top: 35px;
 }
